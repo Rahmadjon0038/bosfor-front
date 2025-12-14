@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+body {
+  max-width: 1920px;
+  padding: 0 100px;
+  margin: 0 auto;
+}
+
+.productgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.grid-span {
+  grid-column: span 2;
+}
