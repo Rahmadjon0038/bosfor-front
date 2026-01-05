@@ -9,7 +9,7 @@ import React from "react";
 import MiniLoader from "../Loader/MiniLoader";
 import { useGetNotify } from "../../hooks/Notify";
 import { uselogin, useRegister } from "../../hooks/auth";
-
+import Cookies from 'js-cookie'
 const style = {
   position: "absolute",
   top: "50%",
@@ -27,11 +27,11 @@ export default function Register({ children }) {
   // --------------- notify hooks ----------
   const notify = useGetNotify();
 
-  // ----------------- register hook ----------
-  const registerMutation = useRegister();
-
-  // ---------------login  hook -----------
-  const loginMutation = uselogin();
+  // --------- register hook--------
+  const registerMutation = useRegister()
+// ----------  login mutation -------
+  const loginMutation = uselogin()
+  
 
   // TABS
   const [tab, setTab] = useState("register");
@@ -55,18 +55,23 @@ export default function Register({ children }) {
       first_name: firstname,
       email,
       password,
+      role: "user"
+
     };
     if (password.length < 6) {
       notify("err", "Parol kamida 6 ta belgi");
     } else {
-      registerMutation.mutate(registerData);
+      
+      registerMutation.mutate({
+        registerData,
+        onSuccess:(data)=>{
+         notify('ok',data?.message)
 
-      // setLoading(true);
-
-      // setTimeout(() => {
-      //   setLoading(false);
-      //   notify("ok", "Ro'yhatdan o'tish mofaqqiyatli");
-      // }, 2000);
+        },
+        onError:(err)=>{
+         notify('err',err?.response?.data?.message)
+         }
+      })
     }
   };
 
@@ -80,12 +85,20 @@ export default function Register({ children }) {
     if (password.length < 6) {
       notify("err", "Parol kamida 6 ta belgi");
     } else {
-      loginMutation.mutate(logindata);
-      // setLoading(true);
-      // setTimeout(() => {
-      //   setLoading(false);
-      //   notify("ok", "Tizimga kirish   mofaqqiyatli");
-      // }, 2000);
+      loginMutation.mutate({
+        logindata,
+        onSuccess:(data)=>{
+          console.log(data)
+          Cookies.set('token',data?.token)
+          Cookies.set('role',data?.role)
+
+         notify('ok',data?.message)
+
+        },
+        onError:(err)=>{
+         notify('err',err?.response?.data?.message)
+         }
+      })
     }
   };
 

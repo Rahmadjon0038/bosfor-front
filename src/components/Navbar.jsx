@@ -15,7 +15,8 @@ import { useGetUsers } from "../hooks/user";
 
 function Navbar() {
   const { data } = useGetUsers();
-  const role = data?.role;
+  const role = data?.role; 
+  
 
   const nav = useNavigate();
   const homeNavigate = () => nav("/");

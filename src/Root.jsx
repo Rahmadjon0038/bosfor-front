@@ -16,7 +16,7 @@ function Root() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/categories/:name" element={<Categories />} />
+        <Route path="/categories/:id" element={<Categories />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/shop" element={<Shop />} />
 

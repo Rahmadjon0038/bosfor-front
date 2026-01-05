@@ -23,9 +23,9 @@ export default function Profile({ userData }) {
 
   return (
     <div>
-      <Button className="absolute  top-6" onClick={handleOpen}>
-        Open modal
-      </Button>
+      <button className="border px-4 py-2 rounded-2xl" onClick={handleOpen}>
+        Profile
+      </button>
       <Modal
         open={open}
         onClose={handleClose}

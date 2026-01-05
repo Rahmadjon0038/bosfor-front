@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 const token = Cookies.get("token");
 
 const getUser = async () => {
-  const response = await instance("/api/user/me");
+  const response = await instance("/user/me");
   return response.data;
 };
 
